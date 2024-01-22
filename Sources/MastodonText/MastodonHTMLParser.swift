@@ -1,5 +1,7 @@
 import Foundation
 
+private let logger = makeLogger()
+
 public final class MastodonHTMLParser: NSObject {
     private let html: String
     private let xml: String
@@ -84,6 +86,6 @@ extension MastodonHTMLParser: XMLParserDelegate {
     }
     
     public func parser(_ parser: XMLParser, parseErrorOccurred error: Error) {
-        print(error)
+        logger.error("\(error)")
     }
 }
