@@ -1,6 +1,5 @@
 import Foundation
-
-private let logger = makeLogger()
+import os
 
 public final class MastodonHTMLParser: NSObject {
     private let html: String
@@ -30,6 +29,8 @@ public final class MastodonHTMLParser: NSObject {
         
         return MastodonText(string: string as String, links: links)
     }
+    
+    private let logger = Logger(subsystem: "me.libei.MastodonText", category: #file)
 }
 
 // MARK: - XMLParserDelegate
