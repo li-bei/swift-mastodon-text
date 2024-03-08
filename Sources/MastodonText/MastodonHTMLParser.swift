@@ -2,15 +2,16 @@ import Foundation
 import os
 
 public final class MastodonHTMLParser: NSObject {
-    private let logger = Logger(subsystem: "me.libei.MastodonText", category: #file)
-    private let html: String
+    private let logger: Logger
     private let xml: String
+    private let html: String
     
     public init(html: String) {
-        self.html = html
+        logger = Logger(subsystem: "me.libei.MastodonText", category: "MastodonHTMLParser")
         xml = "<html>\(html)</html>"
             .replacingOccurrences(of: "&nbsp;", with: " ")
             .replacingOccurrences(of: "<br>", with: "<br/>")
+        self.html = html
     }
     
     private var string: NSMutableString = ""
