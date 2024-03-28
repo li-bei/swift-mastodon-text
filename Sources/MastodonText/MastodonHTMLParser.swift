@@ -2,16 +2,14 @@ import Foundation
 import os
 
 public final class MastodonHTMLParser: NSObject {
-    private let logger: Logger
-    private let xml: String
     private let html: String
+    private let xml: String
     
     public init(html: String) {
-        logger = Logger(subsystem: "me.libei.MastodonText", category: "MastodonHTMLParser")
+        self.html = html
         xml = "<html>\(html)</html>"
             .replacingOccurrences(of: "&nbsp;", with: " ")
             .replacingOccurrences(of: "<br>", with: "<br/>")
-        self.html = html
     }
     
     private var string: NSMutableString = ""
@@ -87,6 +85,7 @@ extension MastodonHTMLParser: XMLParserDelegate {
     }
     
     public func parser(_ parser: XMLParser, parseErrorOccurred error: Error) {
+        let logger = Logger(subsystem: "me.libei.MastodonText", category: "MastodonHTMLParser")
         logger.error("\(error)")
     }
 }
